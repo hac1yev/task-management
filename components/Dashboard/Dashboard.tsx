@@ -26,7 +26,7 @@ export default function Dashboard({ children }: DashboardProps) {
     }else{
       return "";
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     socket.emit("newUser", user.userId);

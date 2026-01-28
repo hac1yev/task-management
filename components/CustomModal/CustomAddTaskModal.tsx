@@ -2,7 +2,7 @@
 
 import { Avatar, Box, Button, FormControl, FormLabel, MenuItem, Modal, OutlinedInput, Select, TextField, Typography, SelectChangeEvent } from "@mui/material";
 import { addUserStyle } from "../MaterialSnippets/MaterialSnippets";
-import { memo, useCallback, useMemo, useState } from "react";
+import { memo, useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
 import { taskSliceActions } from "@/store/task-slice";
 import useAxiosPrivate from "@/hooks/useAxiosPrivate";
@@ -21,7 +21,7 @@ const MenuProps = {
   },
 };
 
-const CustomAddTaskModal = ({ setOpen,open }: CustomModalType) => {
+const CustomAddTaskModal = ({ setOpen,open,stage }: CustomModalType) => {
     const users = useTypedSelector((state) => state.teamReducer.users);
     const settingsData = useTypedSettingSelector(state => state.settingReducer.taskPageSettings);
     const userColors = useMemo(() => {
@@ -130,6 +130,15 @@ const CustomAddTaskModal = ({ setOpen,open }: CustomModalType) => {
         users: typeof value === 'string' ? value.split(',') : value
       }));
     }, []);
+
+    useEffect(() => {
+      setTaskValues((prev) => {
+        return {
+          ...prev,
+          stage
+        }
+      })
+    }, [stage]);
 
   return (
     <Modal

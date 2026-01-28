@@ -7,7 +7,7 @@ import axios from "axios";
 const useAxiosPrivate = () => {
     const accessToken: string = typeof window !== "undefined" && localStorage.getItem("userInfo") 
         ? JSON.parse(localStorage.getItem("userInfo") || "{}").accessToken 
-        : "";    
+        : "";       
     const refresh = useRefreshToken();
 
     useEffect(() => {

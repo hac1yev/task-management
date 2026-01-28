@@ -106,6 +106,7 @@ declare type CustomModalType = {
     setOpen: (value: boolean) => void;
     open: boolean;
     id?: string;
+    stage?: string;
 };
 
 declare type DialogModalType = {

@@ -40,13 +40,14 @@ const TaskComments = ({ id, taskData, setCommentText, setDeformedCommentText, in
     
     const handleLikeComment = useCallback(async ({ commentId, type, fullName, userId }: { commentId: string | undefined, type: string, fullName: string, userId: string }) => {
         try {
+            dispatch(taskDetailSliceActions.likeComment({ commentId, userId: userInfo.userId, type }));
+            
             await axiosPrivate.post(`/api/tasks/${id}/comments/${commentId}`, JSON.stringify({ userId: userInfo.userId, type }), {
                 headers: {
                     'Content-Type': 'application/json',
                 },
             });
-            
-            dispatch(taskDetailSliceActions.likeComment({ commentId, userId: userInfo.userId, type }));
+
             if(type === 'like' && fullName !== userInfo.fullName) {
                 const possibleSendingUsers = settingsData.filter((item) => {
                     if(item && (userId === item.userId)) {
