@@ -17,7 +17,7 @@ export async function POST(req: Request) {
     }
     
     if(newPassword === "" || confirmPassword === "") {
-        return NextResponse.json({ message: 'Please fill the inputs!' }, { status: 400 });
+        return NextResponse.json({ message: 'Please fill both inputs!' }, { status: 400 });
     }
 
     if(newPassword !== confirmPassword) {
